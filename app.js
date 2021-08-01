@@ -24,7 +24,7 @@ const app = express();
 app.set("view engine", "pug");
 app.set("views", path.join(__dirname, "views"));
 
-//////////////////(1) MIDDLE WARES
+//////////////////(1) MIDDLE WARES/////
 app.use(express.static(path.join(__dirname, "public"))); //means al the static assest comes from public folder
 
 //own midleware
@@ -41,7 +41,7 @@ if (process.env.NODE_ENV === "development") {
 const limiter = rateLimit({
   max: 1000,
   windowMs: 60 * 60 * 1000,
-  message: "Too many request for this ip. Please try 1hr Later",
+  message: "Too many request for this ip. Please try 1hr Later.....",
 });
 
 app.use("/api", limiter);
