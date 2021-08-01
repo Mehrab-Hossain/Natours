@@ -30,7 +30,7 @@ app.use(express.static(path.join(__dirname, "public"))); //means al the static a
 //own midleware
 
 // SET Security HTTP headers
-app.use(helmet({ contentSecurityPolicy: process.env.NODE_ENV === "production" ? undefined : false }));
+app.use(helmet({ contentSecurityPolicy: process.env.NODE_ENV === "production" ? undefined : true }));
 
 // Development logging
 if (process.env.NODE_ENV === "development") {
