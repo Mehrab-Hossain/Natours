@@ -17,6 +17,7 @@ const reviewRouter = require("./routes/reviewRoutes");
 const viewRouter = require("./routes/viewRoutes");
 const Review = require("./models/reviewModel");
 
+///Start Express App
 const app = express();
 
 app.set("view engine", "pug");
