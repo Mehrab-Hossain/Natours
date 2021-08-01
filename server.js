@@ -1,0 +1,55 @@
+const mongoose = require("mongoose");
+const dotEnv = require("dotenv");
+
+process.on("uncaughtException", (err) => {
+  console.log("Uncaught Exception");
+  console.log(err.name, err.message);
+  console.log("shutting down");
+  process.exit(1);
+});
+
+dotEnv.config({ path: `./config.env` });
+const app = require("./app");
+
+const DB = process.env.DATABASE.replace("<PASSWORD>", process.env.DATABASE_PASSWORD);
+mongoose
+  .connect(DB, {
+    useNewUrlParser: true,
+    useCreateIndex: true,
+    useFindAndModify: false,
+  })
+  .then(() => {
+    //console.log(con.connections);
+    console.log("DB connection Succesfull");
+  });
+
+// const testTour = new Tour({
+//   name: "The Park Camper",
+//   price: 780,
+// });
+
+// testTour
+//   .save()
+//   .then((doc) => {
+//     console.log(doc);
+//   })
+//   .catch((err) => {
+//     console.log("ERROR: ", err);
+//   });
+const port = 3000;
+const server = app.listen(port, () => {
+  console.log("app running on port 3000");
+});
+
+////Tes
+
+///unhandaled rejection
+
+process.on("unhandledRejection", (err) => {
+  console.log("Unhandle rejection");
+  console.log(err.name, err.message);
+  console.log("shutting down");
+  server.close(() => {
+    process.exit(1);
+  });
+});
