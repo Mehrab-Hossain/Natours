@@ -8,6 +8,7 @@ const mongoSanitize = require("express-mongo-sanitize");
 const xss = require("xss-clean");
 const hpp = require("hpp");
 const cookieParser = require("cookie-parser");
+const compression = require("compression");
 
 const globalErrorHandler = require("./controllers/errorController");
 const AppError = require("./utilites/appError");
@@ -62,6 +63,8 @@ app.use(
     whitelist: ["duration", "ratingsAverage", "ratingsQuantity", "maxGroupSize", "difficulty", "price"],
   })
 );
+
+app.use(compression());
 
 // Serving static file
 // app.use(express.static(`${__dirname}/public`));
